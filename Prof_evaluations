@@ -1,0 +1,21 @@
+prof_data<-read.csv(file.choose(),header=T)
+
+#Convert characters of interest to factors
+prof_data$pepper<-as.factor(prof_data$pepper)
+prof_data$gender<-as.factor(prof_data$gender)
+prof_data$discipline<-as.factor(prof_data$discipline)
+
+#Fitting the model
+mod<-lm(prof_data$quality~prof_data$gender+prof_data$numYears+prof_data$discipline+prof_data$easiness+prof_data$raterInterest+prof_data$pepper)
+
+#Checking assumptions for multiple linear regression models
+plot(mod)
+
+#Check p-vals
+summary(mod)
+
+confint(mod,conf.level=0.95)
+
+
+#Quality vs discipline 
+plot(prof_data$discipline,prof_data$quality)
